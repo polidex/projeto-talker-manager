@@ -13,11 +13,6 @@ const readTalkerFile = async () => {
   }
 };
 
-const getTalker = async () => {
-  const data = await readTalkerFile();
-  return data;
-};
-
 module.exports = {
-  getTalker,
+  readTalkerFile,
 };
