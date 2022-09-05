@@ -1,9 +1,9 @@
 const express = require('express');
 const talker = require('../readTalkerFile');
 
-const routerGetTalkerById = express.Router();
+const routerTalkerById = express.Router();
 
-routerGetTalkerById.get('/talker/:id', async (req, res) => {
+routerTalkerById.get('/talker/:id', async (req, res) => {
   const { id } = req.params;
   const data = await talker.readTalkerFile();
   const pessoa = data.find((parm) => parm.id === Number(id));
@@ -14,4 +14,4 @@ routerGetTalkerById.get('/talker/:id', async (req, res) => {
   return res.status(200).json(pessoa);
 });
 
-module.exports = routerGetTalkerById;
+module.exports = routerTalkerById;

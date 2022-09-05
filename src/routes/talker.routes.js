@@ -1,11 +1,16 @@
 const express = require('express');
 const talker = require('../readTalkerFile');
 
-const routerGetTalker = express.Router();
+const routerTalker = express.Router();
 
-routerGetTalker.get('/talker', async (req, res) => {
+routerTalker.get('/talker', async (req, res) => {
   const talkers = await talker.readTalkerFile();
   return res.status(200).json(talkers);
 });
 
-module.exports = routerGetTalker;
+routerTalker.post('/talker', async (req, res) => {
+  const talkerPost = req.boby;
+  const requiredProps = ['name', 'age', ]
+});
+
+module.exports = routerTalker;

@@ -1,5 +1,5 @@
 const emailFormat = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
-const loginValidator = (req, res) => {
+const loginValidator = (req, res, next) => {
   const { email, password } = req.body;
   if (!email) {
     return res.status(400)
@@ -17,6 +17,7 @@ const loginValidator = (req, res) => {
     return res.status(400)
     .json({ message: 'O "password" deve ter pelo menos 6 caracteres' });
   }
+  next();
 };
 
 module.exports = loginValidator;

@@ -1,7 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const routerGetTalker = require('./routes/talker.routes');
-const routerGetTalkerById = require('./routes/talkerById.routes');
+const routerTalker = require('./routes/talker.routes');
+const routerTalkerById = require('./routes/talkerById.routes');
 const routerLogin = require('./routes/login.routes');
 
 const app = express();
@@ -10,9 +10,9 @@ app.use(bodyParser.json());
 const HTTP_OK_STATUS = 200;
 const PORT = '3000';
 
-app.use(routerGetTalker);
+app.use(routerTalker);
 
-app.use(routerGetTalkerById);
+app.use(routerTalkerById);
 
 app.use(routerLogin);
 
