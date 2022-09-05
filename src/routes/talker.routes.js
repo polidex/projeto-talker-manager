@@ -8,9 +8,9 @@ routerTalker.get('/talker', async (req, res) => {
   return res.status(200).json(talkers);
 });
 
-routerTalker.post('/talker', async (req, res) => {
-  const talkerPost = req.boby;
-  const requiredProps = ['name', 'age', ]
-});
+// routerTalker.post('/talker', async (req, res) => {
+//   const talkerPost = req.boby;
+//   const requiredProps = ['name', 'age', ]
+// });
 
 module.exports = routerTalker;
