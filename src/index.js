@@ -1,7 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const routerGetTalker = require('./routes/getTalker.routes');
-const routerGetTalkerById = require('./routes/getTalkerById.routes');
+const routerGetTalker = require('./routes/talker.routes');
+const routerGetTalkerById = require('./routes/talkerById.routes');
 const routerLogin = require('./routes/login.routes');
 
 const app = express();
