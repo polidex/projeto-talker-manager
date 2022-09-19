@@ -13,6 +13,16 @@ const readTalkerFile = async () => {
   }
 };
 
+const writeTalkerFile = async (param) => {
+  try {
+    await fs.writeFile(join(__dirname, path), JSON.stringify(param));
+  } catch (error) {
+    console.log('erro ao escrever o arquivo', error.message);
+    return null;
+  }
+};
+
 module.exports = {
   readTalkerFile,
+  writeTalkerFile,
 };

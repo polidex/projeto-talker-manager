@@ -1,4 +1,4 @@
-const emailFormat = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
+const regex = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
 const loginValidator = (req, res, next) => {
   const { email, password } = req.body;
   if (!email) {
@@ -9,7 +9,7 @@ const loginValidator = (req, res, next) => {
     return res.status(400)
     .json({ message: 'O campo "password" é obrigatório' });
   }
-  if (!email.match(emailFormat)) {
+  if (!email.match(regex)) {
     return res.status(400)
     .json({ message: 'O "email" deve ter o formato "email@email.com"' });
   }
