@@ -9,20 +9,35 @@ const rateValidator = require('../utils/rateValidator');
 
 const routerTalker = express.Router();
 
-routerTalker.get('/', async (_req, res) => {
+routerTalker.get('/search', tokenValidator, async (req, res) => {
+  const { q } = req.query;
   const talkers = await talker.readTalkerFile();
-  return res.status(200).json(talkers);
+  
+  if (!q) {
+    return res.status(200).json(talkers);
+  }
+  
+  const searchTalker = talkers
+  .filter((selectedTalker) => selectedTalker.name.toLowerCase()
+  .includes(q.toLowerCase()));
+  
+  return res.status(200).json(searchTalker);
 });
 
 routerTalker.get('/:id', async (req, res) => {
   const { id } = req.params;
   const data = await talker.readTalkerFile();
   const pessoa = data.find((parm) => parm.id === Number(id));
-
+  
   if (pessoa === undefined) {
     return res.status(404).json({ message: 'Pessoa palestrante não encontrada' });
   }
   return res.status(200).json(pessoa);
+});
+
+routerTalker.get('/', async (_req, res) => {
+  const talkers = await talker.readTalkerFile();
+  return res.status(200).json(talkers);
 });
 
 routerTalker.post('/', tokenValidator, nameValidator, ageValidator, talkValidator,
@@ -51,7 +66,7 @@ watchedAtValidator, rateValidator, async (req, res) => {
     res.status(200).json(editTalker);
   });
 
-  routerTalker.delete('/:id', tokenValidator, async (req, res) => {
+routerTalker.delete('/:id', tokenValidator, async (req, res) => {
   const { id } = req.params;
   const talkers = await talker.readTalkerFile();
   const deleteTalker = talkers
@@ -59,6 +74,6 @@ watchedAtValidator, rateValidator, async (req, res) => {
   await talker.writeTalkerFile(deleteTalker);
   
     res.status(204).json();
-  });
+});
 
 module.exports = routerTalker;
