@@ -2,7 +2,7 @@ const rateValidator = (req, res, next) => {
   const { talk } = req.body;
   const { rate } = talk;
 
-  if (!rate) {
+  if (!rate && rate !== 0) {
     return res.status(400)
     .json({ message: 'O campo "rate" é obrigatório' });
   }

@@ -35,4 +35,20 @@ watchedAtValidator, rateValidator, async (req, res) => {
   return res.status(201).json(newTalker);
 });
 
+routerTalker.put('/:id', tokenValidator, nameValidator, ageValidator, talkValidator,
+watchedAtValidator, rateValidator, async (req, res) => {
+  const { id } = req.params;
+  const { name, age, talk } = req.body;
+  const talkers = await talker.readTalkerFile();
+  const editTalker = { name, age, talk, id: Number(id) };
+    talkers.map((selectedTalker) => {
+      if (selectedTalker.id === Number(id)) {
+        return { ...selectedTalker };
+      }
+      return selectedTalker;
+    });
+    await talker.writeTalkerFile([editTalker]);
+    res.status(200).json(editTalker);
+  });
+
 module.exports = routerTalker;
