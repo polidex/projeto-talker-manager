@@ -51,4 +51,14 @@ watchedAtValidator, rateValidator, async (req, res) => {
     res.status(200).json(editTalker);
   });
 
+  routerTalker.delete('/:id', tokenValidator, async (req, res) => {
+  const { id } = req.params;
+  const talkers = await talker.readTalkerFile();
+  const deleteTalker = talkers
+    .filter((selectedTalker) => selectedTalker.id !== Number(id));
+  await talker.writeTalkerFile(deleteTalker);
+  
+    res.status(204).json();
+  });
+
 module.exports = routerTalker;
